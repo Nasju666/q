@@ -44,8 +44,8 @@ options.add_argument("--disable-notifications")
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 
-# Uncomment to run in background
-# options.add_argument("--headless=new")
+# Run in headless mode for faster execution (no browser window)
+options.add_argument("--headless=new")
 
 try:
     print("🚀 Starting Chrome browser...")
@@ -79,7 +79,7 @@ try:
             try:
                 driver.get("https://justiniani.infinityfree.me/index.php?view=login")
                 
-                WebDriverWait(driver, 10).until(
+                WebDriverWait(driver, 5).until(
                     EC.presence_of_element_located((By.NAME, "email"))
                 )
                 
@@ -92,7 +92,7 @@ try:
                 password_field.send_keys(password)
                 
                 password_field.submit()
-                time.sleep(3)
+                time.sleep(0.5)  # Reduced from 3 to 0.5 seconds
                 
                 current_url = driver.current_url
                 page_source = driver.page_source.lower()
